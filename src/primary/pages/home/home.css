@@ -1,0 +1,8 @@
+.profileList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  border: 1px black solid;
+  padding: 24px;
+}

@@ -2,7 +2,8 @@ class Profile {
   constructor(
     private _login: string,
     private _id: number,
-    private _avatarUrl: string
+    private _avatarUrl: string,
+    private _profileUrl: string
   ) {}
 
   get login() {
@@ -15,6 +16,10 @@ class Profile {
 
   get avatarUrl() {
     return this._avatarUrl;
+  }
+
+  get profileUrl() {
+    return this._profileUrl;
   }
 }
 

@@ -1,13 +1,15 @@
-import { FormEvent, useState } from "react";
+import "./home.css";
+import { FormEvent, useCallback, useState } from "react";
 import Profile from "../../../domain/Profile/Profile";
 import Input from "../../components/Input/Input";
 import useDependency from "../../hooks/useDependency";
+import ProfileItem from "./components/ProfileItem";
 
 const Home = () => {
   const { profileRepository } = useDependency();
   const [profiles, setProfiles] = useState<Profile[]>([]);
 
-  const handleSearch = (e: FormEvent<HTMLInputElement>) => {
+  const handleSearch = useCallback((e: FormEvent<HTMLInputElement>) => {
     const search = (e.target as HTMLInputElement).value;
 
     if (search.length > 2) {
@@ -15,16 +17,16 @@ const Home = () => {
         setProfiles(resp ?? []);
       });
     }
-  };
+  }, []);
 
   return (
     <>
       <Input type="search" onInput={handleSearch} debounce={500} />
-      <ul>
+      <div className="profileList">
         {profiles.map((profile) => (
-          <li key={profile.id}>{profile.login}</li>
+          <ProfileItem key={profile.id} profile={profile} isCheck={true} />
         ))}
-      </ul>
+      </div>
     </>
   );
 };

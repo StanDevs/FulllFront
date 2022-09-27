@@ -21,5 +21,10 @@ export type TRestProfile = {
 };
 
 export const toProfile = (restProfile: TRestProfile): Profile => {
-  return new Profile(restProfile.login, restProfile.id, restProfile.avatar_url);
+  return new Profile(
+    restProfile.login,
+    restProfile.id,
+    restProfile.avatar_url,
+    restProfile.html_url
+  );
 };

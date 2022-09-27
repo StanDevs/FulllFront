@@ -1,5 +1,11 @@
+:root {
+  --bg-grey-1: #d5d5d5;
+  --blue: #00a1ff;
+}
+
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
 }

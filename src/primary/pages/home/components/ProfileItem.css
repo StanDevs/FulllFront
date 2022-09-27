@@ -1,0 +1,40 @@
+.profileItem {
+  background-color: var(--bg-grey-1);
+  border-radius: 8px;
+  width: 100px;
+  padding: 12px 8px 24px 8px;
+}
+
+.profileItem__avatarContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.profileItem__avatar {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.profileItem__login,
+.profileItem__id {
+  text-align: center;
+}
+
+.profileItem__login {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profileItem__buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.profileItem__button {
+  background-color: var(--blue);
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+}
