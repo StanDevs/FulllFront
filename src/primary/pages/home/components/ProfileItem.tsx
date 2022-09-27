@@ -1,5 +1,5 @@
 import "./ProfileItem.css";
-import { useCallback } from "react";
+import { FormEvent, useCallback } from "react";
 import Profile from "../../../../domain/Profile/Profile";
 import Input from "../../../components/Input/Input";
 
@@ -12,9 +12,13 @@ const ProfileItem = ({
   isCheck: boolean;
   onCheck: (profileId: number) => any;
 }) => {
-  const goToProfile = useCallback(() => {
-    window.open(profile.profileUrl, "_blank");
-  }, [profile]);
+  const goToProfile = useCallback(
+    (e: FormEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      window.open(profile.profileUrl, "_blank");
+    },
+    [profile]
+  );
 
   return (
     <div className="profileItem" onClick={() => onCheck(profile.id)}>
