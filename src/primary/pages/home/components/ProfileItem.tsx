@@ -1,6 +1,7 @@
 import "./ProfileItem.css";
 import { useCallback } from "react";
 import Profile from "../../../../domain/Profile/Profile";
+import Input from "../../../components/Input/Input";
 
 const ProfileItem = ({
   profile,
@@ -17,7 +18,7 @@ const ProfileItem = ({
 
   return (
     <div className="profileItem" onClick={() => onCheck(profile.id)}>
-      <input type="checkbox" checked={isCheck} readOnly />
+      <Input type="checkbox" checked={isCheck} readOnly />
       <div className="profileItem__avatarContainer">
         <img
           className="profileItem__avatar"
