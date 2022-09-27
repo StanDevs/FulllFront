@@ -1,8 +1,14 @@
+import "./app.css"
+import DependencyProvider from "./context/DependencyProvider";
+import Home from "./pages/home/Home";
+
 function App() {
   return (
-    <div className="App">
-      Hello world
+    <DependencyProvider>
+    <div data-testid="app" className="App">
+      <Home />
     </div>
+    </DependencyProvider>
   );
 }
 

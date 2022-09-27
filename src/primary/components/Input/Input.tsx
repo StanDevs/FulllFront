@@ -1,0 +1,12 @@
+import { InputHTMLAttributes } from "react"
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
+    debounce?: number
+}
+
+const Input = (props: InputProps) => {
+
+    return <input {...props} />
+}
+
+export default Input
