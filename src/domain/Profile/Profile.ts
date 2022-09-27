@@ -1,4 +1,5 @@
 class Profile {
+  private _isCheck = false;
   constructor(
     private _login: string,
     private _id: number,
@@ -20,6 +21,14 @@ class Profile {
 
   get profileUrl() {
     return this._profileUrl;
+  }
+
+  get isCheck() {
+    return this._isCheck;
+  }
+
+  public toggleIsCheck() {
+    this._isCheck = !this._isCheck;
   }
 }
 

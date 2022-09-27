@@ -5,17 +5,19 @@ import Profile from "../../../../domain/Profile/Profile";
 const ProfileItem = ({
   profile,
   isCheck,
+  onCheck,
 }: {
   profile: Profile;
   isCheck: boolean;
+  onCheck: (profileId: number) => any;
 }) => {
   const goToProfile = useCallback(() => {
     window.open(profile.profileUrl, "_blank");
   }, [profile]);
 
   return (
-    <div className="profileItem">
-      <input type="checkbox" checked={isCheck} />
+    <div className="profileItem" onClick={() => onCheck(profile.id)}>
+      <input type="checkbox" checked={isCheck} readOnly />
       <div className="profileItem__avatarContainer">
         <img
           className="profileItem__avatar"
