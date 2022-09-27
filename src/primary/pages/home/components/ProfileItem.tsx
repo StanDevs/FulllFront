@@ -2,6 +2,7 @@ import "./ProfileItem.css";
 import { FormEvent, useCallback } from "react";
 import Profile from "../../../../domain/Profile/Profile";
 import Input from "../../../components/Input/Input";
+import useEditMode from "../../../hooks/useEditMode";
 
 const ProfileItem = ({
   profile,
@@ -12,6 +13,8 @@ const ProfileItem = ({
   isCheck: boolean;
   onCheck: (profileId: number) => any;
 }) => {
+  const { isEdit } = useEditMode();
+
   const goToProfile = useCallback(
     (e: FormEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -20,9 +23,13 @@ const ProfileItem = ({
     [profile]
   );
 
+  const handleCheck = () => {
+    if (isEdit) onCheck(profile.id);
+  };
+
   return (
-    <div className="profileItem" onClick={() => onCheck(profile.id)}>
-      <Input type="checkbox" checked={isCheck} readOnly />
+    <div className="profileItem" onClick={handleCheck}>
+      {isEdit && <Input type="checkbox" checked={isCheck} readOnly />}
       <div className="profileItem__avatarContainer">
         <img
           className="profileItem__avatar"

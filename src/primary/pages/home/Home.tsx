@@ -4,10 +4,12 @@ import Profile from "../../../domain/Profile/Profile";
 import Input from "../../components/Input/Input";
 import useDependency from "../../hooks/useDependency";
 import ProfileItem from "./components/ProfileItem";
+import useEditMode from "../../hooks/useEditMode";
 
 const Home = () => {
   const { profileRepository } = useDependency();
   const [profiles, setProfiles] = useState<Profile[]>([]);
+  const { isEdit } = useEditMode();
   const [checkedProfile, setCheckedProfile] = useState<Record<number, boolean>>(
     {}
   );
@@ -47,6 +49,17 @@ const Home = () => {
     setProfiles((prev) => prev.filter((p) => !checkedProfile[p.id]));
   }, [checkedProfile, profiles]);
 
+  // const handleDuplicateCheckedItems = useCallback(() => {
+  //   setProfiles((prev) =>
+  //     prev.flatMap((profile) => {
+  //       if (checkedProfile[profile.id]) {
+  //         return [profile, profile];
+  //       }
+  //       return [profile];
+  //     })
+  //   );
+  // }, [profiles, checkedProfile]);
+
   const checkedItemCount = useMemo(
     () => Object.values(checkedProfile).filter((isTrue) => isTrue).length,
     [checkedProfile]
@@ -59,9 +72,14 @@ const Home = () => {
   return (
     <>
       <Input type="search" onInput={handleSearch} debounce={500} />
-      {checkedItemCount}
-      <Input type="checkbox" onChange={handleSelectAll} />
-      <button onClick={handleDeleteCheckedItems}>Delete</button>
+      {isEdit && (
+        <>
+          {checkedItemCount}
+          <Input type="checkbox" onChange={handleSelectAll} />
+          <button onClick={handleDeleteCheckedItems}>Delete</button>
+          {/* <button onClick={handleDuplicateCheckedItems}>Duplicate</button> */}
+        </>
+      )}
       <div className="profileList">
         {profiles.map((profile) => (
           <ProfileItem
