@@ -107,6 +107,7 @@ const Home = () => {
         )}
       </div>
       <div className="home__profileList">
+        {profiles.length === 0 && <div>Aucun profil trouvé</div>}
         {profiles.map((profile) => (
           <ProfileItem
             key={profile.id}

@@ -2,6 +2,7 @@ import myFetch from "./myFetch";
 
 describe("My fetch", () => {
   beforeEach(() => {
+    //@ts-ignore
     if (global.fetch.mockClear) global.fetch.mockClear();
   });
   it("Should fetch and return data", async () => {
@@ -10,6 +11,7 @@ describe("My fetch", () => {
 
     jest
       .spyOn(global, "fetch")
+      //@ts-ignore
       .mockImplementation(() =>
         Promise.resolve({ json: () => Promise.resolve(data) })
       );

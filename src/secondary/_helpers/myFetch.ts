@@ -1,3 +1,5 @@
+export type TFetch = (queryUrl: string) => Promise<any>;
+
 const myFetch = (queryUrl: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     fetch(queryUrl)
