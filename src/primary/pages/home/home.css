@@ -1,8 +1,38 @@
-.profileList {
+.home__header {
+  padding: 0 24px 16px;
+}
+
+.home__profileList {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 24px;
+  justify-content: space-between;
   border: 1px black solid;
   padding: 24px;
+}
+
+.home__searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.home__actionsContainer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home__actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home__delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.home__checkAllLabel {
+  margin-left: 8px;
 }

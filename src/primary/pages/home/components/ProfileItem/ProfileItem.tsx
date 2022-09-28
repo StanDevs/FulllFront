@@ -1,8 +1,8 @@
 import "./ProfileItem.css";
 import { FormEvent, useCallback } from "react";
-import Profile from "../../../../domain/Profile/Profile";
-import Input from "../../../components/Input/Input";
-import useEditMode from "../../../hooks/useEditMode";
+import Profile from "../../../../../domain/Profile/Profile";
+import useEditMode from "../../../../hooks/useEditMode";
+import Input from "../../../../components/Input/Input";
 
 const ProfileItem = ({
   profile,

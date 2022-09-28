@@ -1,3 +1,4 @@
+import "./input.css";
 import { debounce } from "lodash";
 import { FormEvent, InputHTMLAttributes, useCallback } from "react";
 
@@ -23,7 +24,13 @@ const Input = (props: InputProps) => {
     [props.onInput, props.debounce, onDebouncedInput]
   );
 
-  return <input {...props} onInput={onInput} />;
+  return (
+    <input
+      className={`${props.className ?? ""} input`}
+      {...props}
+      onInput={onInput}
+    />
+  );
 };
 
 export default Input;

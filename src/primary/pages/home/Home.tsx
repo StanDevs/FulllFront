@@ -3,8 +3,9 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Profile from "../../../domain/Profile/Profile";
 import Input from "../../components/Input/Input";
 import useDependency from "../../hooks/useDependency";
-import ProfileItem from "./components/ProfileItem";
 import useEditMode from "../../hooks/useEditMode";
+import Trash from "../../Assets/Icons/Trash";
+import ProfileItem from "./components/ProfileItem/ProfileItem";
 
 const Home = () => {
   const { profileRepository } = useDependency();
@@ -12,6 +13,10 @@ const Home = () => {
   const { isEdit } = useEditMode();
   const [checkedProfile, setCheckedProfile] = useState<Record<number, boolean>>(
     {}
+  );
+  const checkedItemCount = useMemo(
+    () => Object.values(checkedProfile).filter((isTrue) => isTrue).length,
+    [checkedProfile]
   );
 
   const handleSearch = useCallback((e: FormEvent<HTMLInputElement>) => {
@@ -21,6 +26,8 @@ const Home = () => {
       profileRepository.get(search).then((resp) => {
         setProfiles(resp ?? []);
       });
+    } else {
+      setProfiles([]);
     }
 
     setCheckedProfile({});
@@ -46,7 +53,10 @@ const Home = () => {
   );
 
   const handleDeleteCheckedItems = useCallback(() => {
-    setProfiles((prev) => prev.filter((p) => !checkedProfile[p.id]));
+    const ok = window.confirm(
+      `Êtes-vous sûr de vouloir supprimer ${checkedItemCount}`
+    );
+    if (ok) setProfiles((prev) => prev.filter((p) => !checkedProfile[p.id]));
   }, [checkedProfile, profiles]);
 
   // const handleDuplicateCheckedItems = useCallback(() => {
@@ -60,27 +70,43 @@ const Home = () => {
   //   );
   // }, [profiles, checkedProfile]);
 
-  const checkedItemCount = useMemo(
-    () => Object.values(checkedProfile).filter((isTrue) => isTrue).length,
-    [checkedProfile]
-  );
-
   useEffect(() => {
     setCheckedProfile({});
   }, [profiles]);
 
   return (
-    <>
-      <Input type="search" onInput={handleSearch} debounce={500} />
-      {isEdit && (
-        <>
-          {checkedItemCount}
-          <Input type="checkbox" onChange={handleSelectAll} />
-          <button onClick={handleDeleteCheckedItems}>Delete</button>
-          {/* <button onClick={handleDuplicateCheckedItems}>Duplicate</button> */}
-        </>
-      )}
-      <div className="profileList">
+    <div className="home">
+      <div className="home__header">
+        <div className="home__searchContainer">
+          <Input
+            type="search"
+            placeholder="Github login"
+            onInput={handleSearch}
+            debounce={500}
+          />
+        </div>
+        {isEdit && (
+          <div className="home__actionsContainer">
+            <div className="home__selected">
+              <Input type="checkbox" onChange={handleSelectAll} />
+              <span className="home__checkAllLabel">
+                {checkedItemCount} elements selected
+              </span>
+            </div>
+            <div className="home__actions">
+              <button
+                className="home__delete"
+                disabled={checkedItemCount === 0}
+                onClick={handleDeleteCheckedItems}
+              >
+                <Trash />
+              </button>
+              {/* <button onClick={handleDuplicateCheckedItems}>Duplicate</button> */}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="home__profileList">
         {profiles.map((profile) => (
           <ProfileItem
             key={profile.id}
@@ -90,7 +116,7 @@ const Home = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

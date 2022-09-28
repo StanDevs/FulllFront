@@ -9,3 +9,7 @@
   margin: 0;
   font-family: sans-serif;
 }
+
+.app__page {
+  padding-top: 32px;
+}

@@ -1,8 +1,9 @@
 .profileItem {
   background-color: var(--bg-grey-1);
   border-radius: 8px;
-  width: 100px;
+  flex: 0 1 max(100px, 24%);
   padding: 12px 8px 24px 8px;
+  margin-bottom: 12px;
 }
 
 .profileItem__avatarContainer {
@@ -12,7 +13,7 @@
 }
 
 .profileItem__avatar {
-  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -37,4 +38,5 @@
   cursor: pointer;
   border: none;
   padding: 8px 12px;
+  margin-top: 12px;
 }
